@@ -4,7 +4,12 @@ env:
   DISTR_REPO: "ubuntu/focal"
 
 on:
+  push:
+    branches:
+    - main
   pull_request:
+    branches:
+    - main
 
 jobs:
   test:
