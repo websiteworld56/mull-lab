@@ -4,8 +4,6 @@ elseif(NOT APPLE)
   set(REPROC_RT_LIBRARY rt) # clock_gettime
 endif()
 
-reproc_library(reproc C)
-
 if(REPROC_MULTITHREADED)
   target_compile_definitions(reproc PRIVATE REPROC_MULTITHREADED)
   target_link_libraries(reproc PRIVATE Threads::Threads)
