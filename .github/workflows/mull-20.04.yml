@@ -45,7 +45,8 @@ jobs:
 
       - name: Run clang
         run: |
-          cd ~/
+          pwd
+          ls
           clang-12 -fexperimental-new-pass-manager -fpass-plugin=/usr/lib/mull-ir-frontend-12 -g -grecord-command-line sed.c -o sed_gl_1
           
       - name: Run Mull
