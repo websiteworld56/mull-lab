@@ -3,13 +3,7 @@ name: Mull (20.04)
 env:
   DISTR_REPO: "ubuntu/focal"
 
-on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
+on: [push, pull_request]
 
 jobs:
   test:
