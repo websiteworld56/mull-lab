@@ -9,17 +9,6 @@ if(REPROC_MULTITHREADED)
   target_link_libraries(reproc PRIVATE Threads::Threads)
 endif()
 
-if(WIN32)
-  set(PLATFORM windows)
-  target_compile_definitions(reproc PRIVATE WIN32_LEAN_AND_MEAN)
-  target_link_libraries(reproc PRIVATE ${REPROC_WINSOCK_LIBRARY})
-else()
-  set(PLATFORM posix)
-  if(NOT APPLE)
-    target_link_libraries(reproc PRIVATE ${REPROC_RT_LIBRARY})
-  endif()
-endif()
-
 target_sources(reproc PRIVATE
   src/clock.${PLATFORM}.c
   src/drain.c
