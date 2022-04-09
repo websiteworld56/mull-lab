@@ -9,23 +9,6 @@ if(REPROC_MULTITHREADED)
   target_link_libraries(reproc PRIVATE Threads::Threads)
 endif()
 
-target_sources(reproc PRIVATE
-  src/clock.${PLATFORM}.c
-  src/drain.c
-  src/error.${PLATFORM}.c
-  src/handle.${PLATFORM}.c
-  src/init.${PLATFORM}.c
-  src/options.c
-  src/pipe.${PLATFORM}.c
-  src/process.${PLATFORM}.c
-  src/redirect.${PLATFORM}.c
-  src/redirect.c
-  src/reproc.c
-  src/run.c
-  src/strv.c
-  src/utf.${PLATFORM}.c
-)
-
 reproc_test(reproc argv C)
 reproc_test(reproc deadline C)
 reproc_test(reproc env C)
