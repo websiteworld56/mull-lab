@@ -1,32 +1,62 @@
-cmake_minimum_required(VERSION 3.12...3.21)
+if(WIN32)
+  set(REPROC_WINSOCK_LIBRARY ws2_32)
+elseif(NOT APPLE)
+  set(REPROC_RT_LIBRARY rt) # clock_gettime
+endif()
 
-project(
-  reproc
-  VERSION 14.2.4
-  DESCRIPTION "Cross-platform C99/C++11 process library"
-  HOMEPAGE_URL "https://github.com/DaanDeMeyer/reproc"
-  LANGUAGES C
-)
-
-# Common options and functions separated for easier reuse in other projects.
-include(cmake/reproc.cmake)
-
-option(REPROC++ "Build reproc++" ${REPROC_DEVELOP})
-option(
-  REPROC_MULTITHREADED
-  "Use `pthread_sigmask` and link against the system's thread library"
-  ON
-)
+reproc_library(reproc C)
 
 if(REPROC_MULTITHREADED)
-  set(THREADS_PREFER_PTHREAD_FLAG ON)
-  find_package(Threads REQUIRED)
-  set(REPROC_THREAD_LIBRARY ${CMAKE_THREAD_LIBS_INIT})
+  target_compile_definitions(reproc PRIVATE REPROC_MULTITHREADED)
+  target_link_libraries(reproc PRIVATE Threads::Threads)
 endif()
 
-add_subdirectory(reproc)
-
-if(REPROC++)
-  enable_language(CXX)
-  add_subdirectory(reproc++)
+if(WIN32)
+  set(PLATFORM windows)
+  target_compile_definitions(reproc PRIVATE WIN32_LEAN_AND_MEAN)
+  target_link_libraries(reproc PRIVATE ${REPROC_WINSOCK_LIBRARY})
+else()
+  set(PLATFORM posix)
+  if(NOT APPLE)
+    target_link_libraries(reproc PRIVATE ${REPROC_RT_LIBRARY})
+  endif()
 endif()
+
+target_sources(reproc PRIVATE
+  src/clock.${PLATFORM}.c
+  src/drain.c
+  src/error.${PLATFORM}.c
+  src/handle.${PLATFORM}.c
+  src/init.${PLATFORM}.c
+  src/options.c
+  src/pipe.${PLATFORM}.c
+  src/process.${PLATFORM}.c
+  src/redirect.${PLATFORM}.c
+  src/redirect.c
+  src/reproc.c
+  src/run.c
+  src/strv.c
+  src/utf.${PLATFORM}.c
+)
+
+reproc_test(reproc argv C)
+reproc_test(reproc deadline C)
+reproc_test(reproc env C)
+reproc_test(reproc io C)
+reproc_test(reproc overflow C)
+reproc_test(reproc path C)
+reproc_test(reproc stop C)
+reproc_test(reproc working-directory C)
+reproc_test(reproc pid C)
+
+if(UNIX)
+  reproc_test(reproc fork C)
+endif()
+
+reproc_example(reproc drain C)
+reproc_example(reproc env C ARGS PROJECT=REPROC)
+reproc_example(reproc path C)
+reproc_example(reproc poll C)
+reproc_example(reproc read C)
+reproc_example(reproc parent C)
+reproc_example(reproc run C)
