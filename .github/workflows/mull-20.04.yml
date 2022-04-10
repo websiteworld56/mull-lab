@@ -55,8 +55,6 @@ jobs:
         
       - name: show files
         run: |
-          ls
-          pwd
           cd reports/
           ls
           
