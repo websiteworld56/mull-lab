@@ -42,7 +42,7 @@ jobs:
       - name: view Mull version
         run: |
            mull-runner-12 --version
-
+           
       - name: Run clang
         run: |
           cd programs/v2/
@@ -51,8 +51,8 @@ jobs:
       - name: Run Mull
         run: |
           cd programs/v2/
-          mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=programs/v2/reports --report-name=group_0
-          
+          mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=./reports/mutation/mutation.json --report-name=group_0
+        
       - name: show files
         run: |
           ls
@@ -67,4 +67,4 @@ jobs:
         if: ${{ always() }} # Upload even if tests don't pass testing threshold
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          report-json: 'programs/v2/reports/group_0.json' # Optional
+          report-json: './reports/mutation/mutation.json' # Optional
