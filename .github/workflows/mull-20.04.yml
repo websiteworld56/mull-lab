@@ -51,15 +51,13 @@ jobs:
       - name: Run Mull
         run: |
           cd programs/v2/
-          mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=./reports/mutation/mutation.json --report-name=group_0
+          mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=reports --report-name=group_0
         
       - name: show files
         run: |
           ls
           pwd
-          cd programs/v2/
-          ls
-          cd programs/v2/reports
+          cd reports/
           ls
           
       - name: Mutation Annotation Report
@@ -67,4 +65,4 @@ jobs:
         if: ${{ always() }} # Upload even if tests don't pass testing threshold
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          report-json: './reports/mutation/mutation.json' # Optional
+          report-json: '/reports/group_0.json' # Optional
