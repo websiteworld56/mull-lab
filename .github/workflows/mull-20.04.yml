@@ -53,6 +53,15 @@ jobs:
           cd programs/v2/
           mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=programs/v2/reports --report-name=group_0
           
+      - name: show files
+        run: |
+          ls
+          pwd
+          cd programs/v2/
+          ls
+          cd programs/v2/reports
+          ls
+          
       - name: Mutation Annotation Report
         uses: johanholmerin/mutation-report-action@0.2.0
         if: ${{ always() }} # Upload even if tests don't pass testing threshold
