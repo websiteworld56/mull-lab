@@ -63,7 +63,8 @@ jobs:
           
       - name: Upload Stryker Report
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: stryker-report
-          path: ./reports/group_0.html
+          path: ./reports/
+
