@@ -49,9 +49,9 @@ jobs:
           cd programs/v2/
           mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=reports --report-name=group_0
         
-      - name: show files
+      - name: show tmp files
         run: |
-          cd reports/
+          cd /__w/mull-lab/mull-lab
           ls
           
       - name: Mutation Annotation Report
