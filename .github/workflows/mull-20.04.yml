@@ -66,4 +66,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: stryker-report
-          path: reports/mutation/html/index.html
+          path: ./reports/group_0.json.html
