@@ -55,8 +55,15 @@ jobs:
           ls
           
       - name: Mutation Annotation Report
-        uses: johanholmerin/mutation-report-action@0.2.0
+        uses: ./
         if: ${{ always() }} # Upload even if tests don't pass testing threshold
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          report-json: '/reports/group_0.json' # Optional
+          report-json: './reports/group_0.json' # Optional
+          
+      - name: Upload Stryker Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: stryker-report
+        path: reports/mutation/html/index.html
