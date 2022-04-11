@@ -38,11 +38,7 @@ jobs:
             -DCMAKE_CXX_COMPILER=clang++-12 \
             -DCMAKE_C_FLAGS="-fpass-plugin=/usr/lib/mull-ir-frontend-12 -fexperimental-new-pass-manager -g -grecord-command-line" \
             -DCMAKE_CXX_FLAGS="-fpass-plugin=/usr/lib/mull-ir-frontend-12 -fexperimental-new-pass-manager -g -grecord-command-line" \
-            ..
-      - name: view Mull version
-        run: |
-           mull-runner-12 --version
-           
+            ..          
       - name: Run clang
         run: |
           cd programs/v2/
