@@ -67,4 +67,28 @@ jobs:
         with:
           name: stryker-report
           path: ./reports/
-
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Serve Files
+        uses: Eun/http-server-action@v1
+        with:
+         directory: /__w/mull-lab/mull-lab/reports
+         port: 8080
+         no-cache: false
+         content-types: |
+          {
+            "appcache": "text/cache-manifest",
+            "css": "text/css",
+            "gif": "image/gif",
+            "html": "text/html",
+            "ico": "image/x-icon",
+            "jpeg": "image/jpeg",
+            "jpg": "image/jpeg",
+            "js": "text/javascript",
+            "json": "application/json",
+            "png": "image/png",
+            "txt": "text/plain",
+            "xml": "text/xml"
+          }
+      - run: curl -vvvv http://localhost:8080/index.html
