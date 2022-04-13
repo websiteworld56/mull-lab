@@ -44,7 +44,12 @@ jobs:
           cd programs/v2/
           clang-12 -fexperimental-new-pass-manager -fpass-plugin=/usr/lib/mull-ir-frontend-12 -g -grecord-command-line sed.c -o sed_gl_1
           
-      - name: Run Mull
+      - name: Run Mull Show mutations
+        run: |
+          cd programs/v2/
+          mull-runner-12 -ide-reporter-show-killed --reporters=IDE sed_gl_1 --report-dir=/__w/mull-lab/mull-lab/reports --report-name=group_0
+          
+      - name: Run Mull Generate JSON
         run: |
           cd programs/v2/
           mull-runner-12 -ide-reporter-show-killed --reporters=Elements sed_gl_1 --report-dir=/__w/mull-lab/mull-lab/reports --report-name=group_0
