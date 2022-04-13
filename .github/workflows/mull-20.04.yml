@@ -12,6 +12,8 @@ jobs:
     container: ubuntu:20.04
 
     steps:
+      - name: work around permission issue
+        run: git config --global --add safe.directory /__w/mull-lab/mull-lab
       - name: Install software
         run: |
           apt-get update
