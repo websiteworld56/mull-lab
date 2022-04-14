@@ -43,7 +43,7 @@ jobs:
             ..          
       - name: Run clang
         run: |
-          cd programs/programs/grep/v0
+          cd programs/grep/v0
           clang-12 -fexperimental-new-pass-manager -fpass-plugin=/usr/lib/mull-ir-frontend-12 -g -grecord-command-line grep.c -o grep_output
           
       - name: Run Mull Show mutations
