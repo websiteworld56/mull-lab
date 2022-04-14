@@ -48,12 +48,12 @@ jobs:
           
       - name: Run Mull Show mutations
         run: |
-          cd programs/programs/grep/v0
+          cd programs/grep/v0
           mull-runner-12 -ide-reporter-show-killed --reporters=IDE grep_output --report-dir=/__w/mull-lab/mull-lab/reports --report-name=group_2
           
       - name: Run Mull Generate JSON
         run: |
-          cd programs/programs/grep/v0
+          cd programs/grep/v0
           mull-runner-12 -ide-reporter-show-killed --reporters=Elements grep_output --report-dir=/__w/mull-lab/mull-lab/reports --report-name=group_2
         
       - name: show tmp files
