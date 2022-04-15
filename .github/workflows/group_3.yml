@@ -53,7 +53,7 @@ jobs:
           
       - name: Run Mull Generate JSON
         run: |
-          cd programs/v2/
+          cd programs/vim
           mull-runner-12 -ide-reporter-show-killed --reporters=Elements ccfilter_output --report-dir=/__w/mull-lab/mull-lab/reports --report-name=group_3
         
       - name: show tmp files
